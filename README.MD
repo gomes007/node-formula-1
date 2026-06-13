@@ -1,81 +1,178 @@
-<div align="center">
+# Node Formula 1 API
 
-  <img src="./.github/assets/blue-saiyan-bg.png" alt="Logo" height="200">
-  <h1 align="center"><strong>NODE BOILERPLATE - BLUE EDITION</strong></h1>
-  <p align="center">
-	  Don't start a new Node project from zero!<br> Use this simple <b>Nodejs</b> boilerplate with pre-configured <b>Typescript</b> in a modern way.
-  </p>
+Projeto desenvolvido como parte do desafio prático da DIO, com o objetivo de praticar conceitos de **Node.js**, **TypeScript**, **Fastify**, rotas HTTP, scripts npm e organização de projetos backend.
 
-</div>
+A aplicação consiste em uma API simples sobre Fórmula 1, permitindo consultar equipes e pilotos.
 
-<br />
+## Tecnologias Utilizadas
 
-  <!-- Badges -->
-<div align="center">
-  
-  [![TypeScript version][ts-badge]][typescript-5-4]
-  [![Node.js version][nodejs-badge]][nodejs]
+* Node.js
+* TypeScript
+* Fastify
+* @fastify/cors
+* TSX
+* TSUP
+* NPM
 
-</div>
+## Funcionalidades
 
-# 🚀 Technologies
+A API possui as seguintes rotas:
 
-This code source was developed with the following items:
+### Listar equipes
 
-### 📦 Dependencies
-
-- [typescript][typescript-npm] - Superset for application scale JavaScript development
-- [tsx][tsx-npm] - TypeScript Execute (tsx): Enable Node.js to run TypeScript
-- [tsup][tsup-npm] - Bundle your TypeScript library with no config, powered by esbuild
-- [@types/node][@types/node-npm] - type definitions for node
-
-### 📄 Files
-
-- `.gitignore` - Ignore folders like node_modules
-- `.env` - Enviroment variables
-- `tsconfig.json` - Typescript configure Options
-
-### ⚡ Scripts
-
-- `npm run dist`: Compiles TypeScript files to JavaScript in the dist directory.
-- `npm run start:dev`: Runs the server in development mode with environment variables loaded from the .env file.
-- `npm run start:watch`: Runs the server in development mode with support for automatic reload on file changes.
-- `npm run start:dist`: Compiles the project and runs the compiled version from the dist directory.
-
-# 👨‍💻 How To Use
-
-click in **[Use this template]** OR
-
-To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js v20+](https://nodejs.org/en/) + [NPM v10+](https://nodejs.org/en/) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/felipeAguiarCode/node-blue-boilerplate
-
-# Go into the repository
-$ cd node-blue-boilerplate
-
-# Install dependencies
-$ npm install
+```http
+GET /teams
 ```
 
-## Author
+Retorna a lista de equipes de Fórmula 1 cadastradas.
 
-| [<img src="https://avatars3.githubusercontent.com/u/37452836?s=96&v=4"><br><sub>Felipe Aguiar</sub>](https://github.com/felipeAguiarCode) |
-| :---------------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [Linkedin](www.linkedin.com/in/felipe-aguiar-exe/)                                             |
+### Buscar equipe por ID
 
-# Credits
+```http
+GET /teams/:id
+```
 
-icons by [Pino Lamanna][dribble-icon]
+Retorna uma equipe específica pelo seu ID.
 
-[typescript]: https://www.typescriptlang.org/
-[typescript-5-4]: https://www.typescriptlang.org/
-[ts-badge]: https://img.shields.io/badge/TypeScript-5.4-blue.svg
-[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2020.00-blue.svg
-[nodejs]: https://nodejs.org/
-[dribble-icon]: https://dribbble.com/Schakalwal
-[typescript-npm]: https://www.npmjs.com/package/typescript
-[tsx-npm]: https://www.npmjs.com/package/tsx
-[tsup-npm]: https://www.npmjs.com/package/tsup
-[@types/node-npm]: https://www.npmjs.com/package/@types/node
+Exemplo:
+
+```http
+GET /teams/4
+```
+
+### Listar pilotos
+
+```http
+GET /drivers
+```
+
+Retorna a lista de pilotos cadastrados.
+
+### Buscar piloto por ID
+
+```http
+GET /drivers/:id
+```
+
+Retorna um piloto específico pelo seu ID.
+
+Exemplo:
+
+```http
+GET /drivers/1
+```
+
+## Melhorias Implementadas
+
+Além de executar o projeto original, realizei uma melhoria na API:
+
+* Correção do ID duplicado na lista de pilotos.
+* Criação da rota `GET /teams/:id` para buscar uma equipe específica pelo ID.
+* Tratamento de erro para quando uma equipe não for encontrada.
+
+Exemplo de retorno quando a equipe não existe:
+
+```json
+{
+  "message": "Team Not Found"
+}
+```
+
+## Como Executar o Projeto
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/gomes007/node-formula-1.git
+```
+
+### 2. Acessar a pasta do projeto
+
+```bash
+cd node-formula-1
+```
+
+### 3. Instalar as dependências
+
+```bash
+npm install
+```
+
+### 4. Executar em modo desenvolvimento
+
+```bash
+npm run start:dev
+```
+
+A aplicação será iniciada em:
+
+```http
+http://localhost:3333
+```
+
+## Scripts Disponíveis
+
+```bash
+npm run start:dev
+```
+
+Executa o projeto em modo desenvolvimento.
+
+```bash
+npm run start:watch
+```
+
+Executa o projeto em modo desenvolvimento com recarregamento automático.
+
+```bash
+npm run dist
+```
+
+Compila os arquivos TypeScript para JavaScript na pasta `dist`.
+
+```bash
+npm run start:dist
+```
+
+Executa a versão compilada do projeto.
+
+## Exemplos de Teste
+
+Após iniciar o servidor, acesse no navegador ou em uma ferramenta como Postman/Insomnia:
+
+```http
+http://localhost:3333/teams
+```
+
+```http
+http://localhost:3333/teams/4
+```
+
+```http
+http://localhost:3333/drivers
+```
+
+```http
+http://localhost:3333/drivers/1
+```
+
+## Aprendizados
+
+Neste projeto, pratiquei:
+
+* Criação de API com Node.js e Fastify.
+* Uso de TypeScript em aplicações backend.
+* Criação de rotas HTTP.
+* Manipulação de parâmetros de rota.
+* Retorno de respostas em JSON.
+* Tratamento básico de erros.
+* Execução de scripts npm.
+* Documentação de projeto no GitHub.
+
+## Referência
+
+Projeto original da DIO:
+
+```text
+https://github.com/digitalinnovationone/node-formula-1
+```

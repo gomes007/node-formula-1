@@ -33,6 +33,23 @@ server.get("/teams", async (request, response) => {
   return { teams };
 });
 
+interface TeamParams {
+  id: string;
+}
+
+server.get<{ Params: TeamParams }>("/teams/:id", async (request, response) => {
+  const id = parseInt(request.params.id);
+  const team = teams.find((t) => t.id === id);
+
+  if (!team) {
+    response.type("application/json").code(404);
+    return { message: "Team Not Found" };
+  }
+
+  response.type("application/json").code(200);
+  return { team };
+});
+
 server.get("/drivers", async (request, response) => {
   response.type("application/json").code(200);
   return { drivers };
